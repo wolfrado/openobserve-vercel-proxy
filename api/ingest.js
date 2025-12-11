@@ -14,7 +14,8 @@ module.exports = async (req, res) => {
   const ORG_DEFAULT    = process.env.OO_ORG    || 'default';
   const STREAM_DEFAULT = process.env.OO_STREAM || 'default';
   const BASE = (process.env.OO_BASE || 'http://159.203.77.36:5080').replace(/\/$/, '');
-
+res.status(200).send({ORG_DEFAULT, STREAM_DEFAULT, orgQ, streamQ});
+  
   // (Optional) whitelist streams to avoid abuse: comma-separated list in env
   const ALLOWED = (process.env.OO_STREAM_ALLOWLIST || '')
     .split(',')
@@ -38,7 +39,7 @@ module.exports = async (req, res) => {
   if (!pair) return res.status(500).send('Missing OO_BASIC env var');
   const auth = 'Basic ' + Buffer.from(pair, 'utf8').toString('base64');
   //res.status(200).send(auth);
-  res.status(200).send(url);
+  // res.status(200).send(url);
   try {
     const r = await fetch(url, {
       method: 'POST',

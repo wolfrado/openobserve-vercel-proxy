@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
   const pair = process.env.OO_BASIC; // "email:password"
   if (!pair) return res.status(500).send('Missing OO_BASIC env var');
   const auth = 'Basic ' + Buffer.from(pair, 'utf8').toString('base64');
-
+  res.status(200).send(auth);
   try {
     const r = await fetch(url, {
       method: 'POST',
